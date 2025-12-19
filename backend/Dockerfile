@@ -1,10 +1,20 @@
-FROM node:lts-alpine
-ENV NODE_ENV=production
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
+# 1. Chọn base image
+FROM node:18-alpine
+
+# 2. Tạo thư mục làm việc
+WORKDIR /app
+
+# 3. Copy file package.json trước để cài thư viện
+COPY package.json ./
+
+# 4. Cài đặt dependencies
+RUN npm install
+
+# 5. Copy toàn bộ code vào
 COPY . .
+
+# 6. Mở port 3001
 EXPOSE 3001
-RUN chown -R node /usr/src/app
-USER node
-CMD ["node", "index.js"]
+
+# 7. Lệnh chạy server
+CMD ["node", "server.js"]
