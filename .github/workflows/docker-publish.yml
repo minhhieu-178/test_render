@@ -3,7 +3,6 @@ name: CI/CD Docker
 on:
   push:
     branches: [ "main" ]
-    # QUAN TRỌNG: Chỉ chạy khi sửa code trong backend
     paths:
       - 'user-management/backend/**'
 
