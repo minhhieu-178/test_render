@@ -1,33 +1,40 @@
-name: CI/CD Docker
+name: CI/CD and Docker
 
 on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'backend/**'
+push:
+branches: [ "main" ]
+paths:
+- 'backend/**'
 
 jobs:
-  build-and-push:
-    name: Build & Push Docker Image
-    runs-on: ubuntu-latest
+build-and-push:
+name: Build & Push Docker Image
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
+steps:
+  # 1. Checkout source code
+  - name: Checkout source code
+    uses: actions/checkout@v4
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  # 2. Setup Docker Buildx
+  - name: Set up Docker Buildx
+    uses: docker/setup-buildx-action@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  # 3. Login Docker Hub
+  - name: Login to Docker Hub
+    uses: docker/login-action@v3
+    with:
+      username: ${{ secrets.DOCKERHUB_USERNAME }}
+      password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend
-          file: ./backend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/test_render-be:latest
+  # 4. Build & Push Docker image
+  - name: Build and push Docker image
+    uses: docker/build-push-action@v5
+    with:
+      context: ./backend
+      file: ./backend/Dockerfile
+      push: true
+      tags: hieutm8/user-management-be:latest
+      cache-from: type=registry,ref=hieutm8/user-management-be:cache
+      cache-to: type=registry,ref=hieutm8/user-management-be:cache,mode=max
+
