@@ -1,20 +1,20 @@
-# 1. Chọn base image
+# Sử dụng Node.js bản nhẹ (alpine) như tài liệu mẫu
 FROM node:18-alpine
 
-# 2. Tạo thư mục làm việc
+# Thiết lập thư mục làm việc
 WORKDIR /app
 
-# 3. Copy file package.json trước để cài thư viện
+# Copy package.json trước để tận dụng cache
 COPY package.json ./
 
-# 4. Cài đặt dependencies
+# Cài đặt thư viện
 RUN npm install
 
-# 5. Copy toàn bộ code vào
+# Copy toàn bộ mã nguồn vào image
 COPY . .
 
-# 6. Mở port 3001
+# Mở port 3001 (Port server của bạn)
 EXPOSE 3001
 
-# 7. Lệnh chạy server
+# Lệnh chạy server (Sửa index.js thành server.js cho đúng code của bạn)
 CMD ["node", "server.js"]
