@@ -32,4 +32,4 @@ jobs:
           context: ./TEST_RENDER/backend
           file: ./TEST_RENDER/backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/user-management-be:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/TEST_RENDER-be:latest
