@@ -1,20 +1,18 @@
-# Sử dụng Node.js bản nhẹ (alpine) như tài liệu mẫu
+# 1. Chọn môi trường
 FROM node:18-alpine
 
-# Thiết lập thư mục làm việc
+# 2. Thư mục làm việc (đơn giản, dễ nhớ)
 WORKDIR /app
 
-# Copy package.json trước để tận dụng cache
+# 3. Copy và cài đặt thư viện
 COPY package.json ./
-
-# Cài đặt thư viện
 RUN npm install
 
-# Copy toàn bộ mã nguồn vào image
+# 4. Copy code vào
 COPY . .
 
-# Mở port 3001 (Port server của bạn)
+# 5. Mở port
 EXPOSE 3001
 
-# Lệnh chạy server (Sửa index.js thành server.js cho đúng code của bạn)
+# 6. Chạy trực tiếp file server.js (Tránh phụ thuộc npm start)
 CMD ["node", "server.js"]
