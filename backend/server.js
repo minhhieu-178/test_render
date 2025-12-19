@@ -11,7 +11,7 @@ const COLLECTION_NAME = 'users';
 const CLUSTER_URL = 'cluster.4i3i6pi.mongodb.net';  
 
 // Connection String
-const MONGODB_URI = `mongodb+srv://20225317:20225317@cluster.4i3i6pi.mongodb.net/IT4409`;
+  const MONGODB_URI = `mongodb+srv://20225317:20225317@cluster.4i3i6pi.mongodb.net/IT4409`;
 
 // Middleware
 app.use(cors());
