@@ -37,4 +37,4 @@ jobs:
           file: ./user-management/backend/Dockerfile
           push: true
           # Tên ảnh trên DockerHub (tự động lấy username từ secret)
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/user-management-be:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}hieutm8/user-management-be:latest
